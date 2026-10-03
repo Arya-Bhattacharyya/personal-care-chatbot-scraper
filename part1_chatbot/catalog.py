@@ -1,54 +1,47 @@
-"""
-Dummy catalog for Personal Care POC.
-In a production setup, this would be queried from an inventory database or vector store.
-"""
-
-PRODUCTS = [
+products = [
     {
-        "id": "SKIN-001",
-        "name": "DermaGlow 10% Vitamin C Serum",
-        "category": "Face Care",
-        "skin_type": "Dull, uneven skin tone",
-        "price": 649,
-        "benefits": "Lightens hyperpigmentation, stimulates collagen, provides antioxidant defense.",
-        "usage": "Smooth 3-4 drops onto a clean face each morning before applying moisturizer and SPF."
+        "id": "PROD01",
+        "name": "HydraBoost Hyaluronic Acid Serum",
+        "category": "Serum",
+        "skin_type": "Dry and dehydrated skin",
+        "price": 599,
+        "benefits": "Provides deep hydration, plumps skin, and reduces tightness.",
+        "usage": "Apply 2-3 drops on damp skin before applying moisturizer."
     },
     {
-        "id": "SKIN-002",
-        "name": "Ceramide Barrier Defense Cream",
-        "category": "Moisturizer",
-        "skin_type": "Dry, sensitive, or compromised barrier",
-        "price": 520,
-        "benefits": "Restores lipid moisture levels, prevents transepidermal water loss, calms redness.",
-        "usage": "Warm a dime-sized amount between fingertips and pat gently across face and neck."
-    },
-    {
-        "id": "SKIN-003",
-        "name": "BHA 2% Salicylic Cleansing Gel",
+        "id": "PROD02",
+        "name": "Tea Tree Clarifying Face Wash",
         "category": "Cleanser",
-        "skin_type": "Oily, acne-prone",
-        "price": 380,
-        "benefits": "Penetrates sebum inside pores, clears blackheads, reduces active breakouts.",
-        "usage": "Massage onto damp skin for 60 seconds once or twice daily, then rinse thoroughly."
+        "skin_type": "Oily and acne-prone skin",
+        "price": 349,
+        "benefits": "Controls extra oil, unclogs pores, and prevents pimples.",
+        "usage": "Take a coin-sized amount, rub gently on wet face, and wash off with water."
     },
     {
-        "id": "GROOM-001",
-        "name": "Cedarwood & Jojoba Conditioning Beard Oil",
-        "category": "Men's Grooming",
-        "skin_type": "All facial hair types / dry underlying skin",
+        "id": "PROD03",
+        "name": "Niacinamide 10% Daily Face Gel",
+        "category": "Moisturizer",
+        "skin_type": "Normal to combination skin",
+        "price": 499,
+        "benefits": "Fades dark acne marks, minimizes open pores, and balances oil production.",
+        "usage": "Take a pea-sized amount and gently massage all over face morning and evening."
+    },
+    {
+        "id": "PROD04",
+        "name": "Matte Finish Sunscreen Gel SPF 50",
+        "category": "Sun Protection",
+        "skin_type": "All skin types",
         "price": 450,
-        "benefits": "Softens coarse beard strands, stops flaking/beard dandruff, non-greasy finish.",
-        "usage": "Distribute 4-6 drops evenly into hands and work through beard down to the roots."
+        "benefits": "Protects from UVA/UVB rays, leaves zero white cast, and gives a non-sticky feel.",
+        "usage": "Apply two finger lengths of sunscreen 15 minutes before stepping out in the sun."
     }
 ]
 
-def format_catalog_for_prompt() -> str:
-    lines = []
-    for item in PRODUCTS:
-        lines.append(
-            f"- {item['name']} (₹{item['price']}) [{item['category']}]: "
-            f"Target: {item['skin_type']}. "
-            f"Key Benefits: {item['benefits']} "
-            f"Directions: {item['usage']}"
-        )
-    return "\n".join(lines)
+def format_catalog_for_prompt():
+    catalog_text = ""
+    for p in products:
+        catalog_text += f"- {p['name']} ({p['category']}) - Price: Rs. {p['price']}\n"
+        catalog_text += f"  Best for: {p['skin_type']}\n"
+        catalog_text += f"  Benefits: {p['benefits']}\n"
+        catalog_text += f"  How to use: {p['usage']}\n\n"
+    return catalog_text.strip()
